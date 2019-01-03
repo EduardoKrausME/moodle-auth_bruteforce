@@ -24,8 +24,8 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2019010300;
+$plugin->version = 2019010301;
 $plugin->requires = 2012050800;
 $plugin->component = 'auth_bruteforce';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.2.3';
+$plugin->release = '1.2.4';
