@@ -114,9 +114,9 @@ class auth_plugin_bruteforce extends auth_plugin_base {
      *
      * @param object $config
      * @param object $err
-     * @param array $user_fields
+     * @param array $userfields
      */
-    public function config_form($config, $err, $user_fields) {
+    public function config_form($config, $err, $userfields) {
         include("config.php");
     }
 
@@ -124,8 +124,6 @@ class auth_plugin_bruteforce extends auth_plugin_base {
      * function process_config
      *
      * @param $config
-     *
-     * @return bool
      */
     public function process_config($config) {
         // Set to defaults if undefined.
