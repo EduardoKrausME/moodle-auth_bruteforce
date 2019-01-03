@@ -25,7 +25,7 @@
 defined('MOODLE_INTERNAL') || die();
 
 /**
- *
+ * function xmldb_auth_bruteforce_install
  */
 function xmldb_auth_bruteforce_install() {
     return true;

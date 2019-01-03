@@ -18,13 +18,13 @@
  * bruteforce protect
  *
  * @package auth_bruteforce
- * @author Eduardo Kraus
+ * @copyright  2019 Eduardo Kraus (http://eduardokraus.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-require_once($CFG->libdir.'/authlib.php');
+require_once($CFG->libdir . '/authlib.php');
 
 /**
  * bruteforce authentication plugin.
@@ -40,26 +40,23 @@ class auth_plugin_bruteforce extends auth_plugin_base {
      * @throws dml_exception
      * @throws coding_exception
      */
-    function auth_plugin_bruteforce() {
+    public function __construct() {
         Global $DB, $CFG;
         $this->authtype = 'bruteforce';
         $this->config = get_config('auth/bruteforce');
 
-        if($CFG->version >= 2014050800)
-        {
+        if ($CFG->version >= 2014050800) {
             $sql = "SELECT id
                     FROM {logstore_standard_log}
                     WHERE action = 'failed'
-                      AND ip = '".$_SERVER['REMOTE_ADDR']."'
+                      AND ip = '" . $_SERVER['REMOTE_ADDR'] . "'
                       AND eventname LIKE '_core_event_user_login_failed'
                       AND timecreated > (UNIX_TIMESTAMP()-86400) ";
-        }
-        else
-        {
+        } else {
             $sql = "SELECT id
                     FROM {log}
                     WHERE module = 'login'
-                      AND ip = '".$_SERVER['REMOTE_ADDR']."'
+                      AND ip = '" . $_SERVER['REMOTE_ADDR'] . "'
                       AND action LIKE 'error'
                       AND time > (UNIX_TIMESTAMP()-86400) ";
         }
@@ -69,8 +66,9 @@ class auth_plugin_bruteforce extends auth_plugin_base {
             $this->config->limit = 20;
         }
 
-        if(count($tests) >= $this->config->limit )
+        if (count($tests) >= $this->config->limit) {
             die(get_string("auth_bruteforcebloqued", "auth_bruteforce"));
+        }
     }
 
     /**
@@ -80,7 +78,7 @@ class auth_plugin_bruteforce extends auth_plugin_base {
      * @param string $password
      * @return bool
      */
-    function user_login ($username, $password) {
+    public function user_login($username, $password) {
         return false;
     }
 
@@ -89,7 +87,7 @@ class auth_plugin_bruteforce extends auth_plugin_base {
      *
      * @return bool
      */
-    function prevent_local_passwords() {
+    public function prevent_local_passwords() {
         return true;
     }
 
@@ -98,7 +96,7 @@ class auth_plugin_bruteforce extends auth_plugin_base {
      *
      * @return bool
      */
-    function is_internal() {
+    public function is_internal() {
         return false;
     }
 
@@ -107,7 +105,7 @@ class auth_plugin_bruteforce extends auth_plugin_base {
      *
      * @return bool
      */
-    function can_change_password() {
+    public function can_change_password() {
         return false;
     }
 
@@ -118,28 +116,27 @@ class auth_plugin_bruteforce extends auth_plugin_base {
      * @param object $err
      * @param array $user_fields
      */
-    function config_form($config, $err, $user_fields) {
-        include "config.php";
+    public function config_form($config, $err, $user_fields) {
+        include("config.php");
     }
 
     /**
      * function process_config
      *
      * @param $config
+     *
      * @return bool
      */
-    function process_config($config) {
-        // set to defaults if undefined
+    public function process_config($config) {
+        // Set to defaults if undefined.
         if (!isset ($config->limit)) {
             $config->limit = 20;
         }
 
-        // save settings.
+        // Save settings.
         set_config('limit', $config->limit, 'auth/bruteforce');
 
         return true;
     }
 
 }
-
-
