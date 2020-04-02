@@ -45,20 +45,21 @@ class auth_plugin_bruteforce extends auth_plugin_base {
         $this->authtype = 'bruteforce';
         $this->config = get_config('auth/bruteforce');
 
+        $timestamp = time();
         if ($CFG->version >= 2014050800) {
             $sql = "SELECT id
                     FROM {logstore_standard_log}
                     WHERE action = 'failed'
                       AND ip = '" . $_SERVER['REMOTE_ADDR'] . "'
                       AND eventname LIKE '_core_event_user_login_failed'
-                      AND timecreated > (UNIX_TIMESTAMP()-86400) ";
+                      AND timecreated > ({$timestamp}-86400) ";
         } else {
             $sql = "SELECT id
                     FROM {log}
                     WHERE module = 'login'
                       AND ip = '" . $_SERVER['REMOTE_ADDR'] . "'
                       AND action LIKE 'error'
-                      AND time > (UNIX_TIMESTAMP()-86400) ";
+                      AND time > ({$timestamp}-86400) ";
         }
         $tests = $DB->get_records_sql($sql);
 
