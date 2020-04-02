@@ -18,14 +18,14 @@
  * Version information
  *
  * @package    auth_bruteforce
- * @copyright  2019 Eduardo Kraus (http://eduardokraus.com)
+ * @copyright  2020 Eduardo Kraus (http://eduardokraus.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version = 2019010302;
+$plugin->version = 2020040200;
 $plugin->requires = 2012050800;
 $plugin->component = 'auth_bruteforce';
 $plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.2.5';
+$plugin->release = '1.3.1';

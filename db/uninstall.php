@@ -15,18 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * install file
- *
  * @package    auth_bruteforce
- * @copyright  2020 Eduardo Kraus (http://eduardokraus.com)
+ * @copyright  2020 Eduardo Kraus {@link http://eduardokraus.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-/**
- * function xmldb_auth_bruteforce_install
- */
-function xmldb_auth_bruteforce_install() {
-    return true;
+function xmldb_auth_bruteforce_uninstall() {
 }
