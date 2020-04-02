@@ -18,7 +18,7 @@
  * bruteforce protect
  *
  * @package auth_bruteforce
- * @copyright  2019 Eduardo Kraus (http://eduardokraus.com)
+ * @copyright  2020 Eduardo Kraus (http://eduardokraus.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 
@@ -29,7 +29,7 @@ require_once($CFG->libdir . '/authlib.php');
 /**
  * bruteforce authentication plugin.
  *
- * @copyright  2019 Eduardo Kraus (http://eduardokraus.com)
+ * @copyright  2020 Eduardo Kraus (http://eduardokraus.com)
  * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
 class auth_plugin_bruteforce extends auth_plugin_base {
@@ -41,26 +41,15 @@ class auth_plugin_bruteforce extends auth_plugin_base {
      * @throws coding_exception
      */
     public function __construct() {
-        Global $DB, $CFG;
+        Global $DB;
         $this->authtype = 'bruteforce';
         $this->config = get_config('auth/bruteforce');
 
         $timestamp = time();
-        if ($CFG->version >= 2014050800) {
-            $sql = "SELECT id
-                    FROM {logstore_standard_log}
-                    WHERE action = 'failed'
-                      AND ip = '" . $_SERVER['REMOTE_ADDR'] . "'
-                      AND eventname LIKE '_core_event_user_login_failed'
-                      AND timecreated > ({$timestamp}-86400) ";
-        } else {
-            $sql = "SELECT id
-                    FROM {log}
-                    WHERE module = 'login'
-                      AND ip = '" . $_SERVER['REMOTE_ADDR'] . "'
-                      AND action LIKE 'error'
-                      AND time > ({$timestamp}-86400) ";
-        }
+        $sql = "SELECT id
+                  FROM {bruteforce_ip}
+                 WHERE ip = '" . getremoteaddr() . "'
+                   AND time > ({$timestamp}-86400) ";
         $tests = $DB->get_records_sql($sql);
 
         if (!isset ($this->config->limit)) {
