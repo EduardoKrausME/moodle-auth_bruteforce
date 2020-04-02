@@ -22,7 +22,9 @@
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-$string['auth_bruteforcedescription'] = 'Sistema de Brute Force irá bloquear os usuários após um limite de tentativas.';
+$string['auth_bruteforcedescription'] = '<p>Sistema de Brute Force irá bloquear os usuários após um limite de tentativas.</p>
+            <p>O Moodle fornece suporte interno para verificação de login de força bruta, conforme documentado aqui: <a href="https://docs.moodle.org/dev/Security:Brute-forcing_login" target="_blank">https://docs.moodle.org/dev/Security:Brute-forcing_login</a></p>
+            <p>Mas - o recurso principal bloqueia completamente a conta de usuário afetada. Este plugin bloqueará o acesso ao endereço IP que tenta acessar seu site, independentemente do nome de usuário que está sendo passado.</p>';
 $string['auth_bruteforcelimit'] = 'Limite máximo de tentativas por IP até o ambiente bloquear';
 $string['auth_bruteforcelimit_key'] = 'Máximo de tentativas por IP';
 $string['auth_bruteforcebloqued'] = 'Você errou muitas vezes a senha e seu IP foi bloqueado. Contate o administrador do Moodle para mars detalhes';
