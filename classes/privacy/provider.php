@@ -14,18 +14,25 @@
 // You should have received a copy of the GNU General Public License
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
+namespace auth_bruteforce\privacy;
+
+defined('MOODLE_INTERNAL') || die();
+
 /**
- * lang file
+ * Privacy implementation for auth_bruteforce.
  *
- * @package    auth_bruteforce
- * @copyright  2020 Eduardo Kraus (http://eduardokraus.com)
- * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
+ * @package   auth_bruteforce
+ * @copyright 2020 Eduardo Kraus (http://eduardokraus.com)
+ * @license   http://www.gnu.org/copyleft/gpl.html GNU Public License
  */
-
-$string['auth_bruteforcedescription'] = 'Brute Force system will block users after a retry limit.';
-$string['auth_bruteforcelimit'] = 'Maximum of attempts by IP to the environment block';
-$string['auth_bruteforcelimit_key'] = 'Maximum attempts per IP';
-$string['auth_bruteforcebloqued'] = 'You have exceeded the retry limit. Contact the Administrator for more details.';
-$string['pluginname'] = 'Brute Force Detect';
-
-$string['privacy:metadata'] = 'The auth bruteforce does not store any personal data.';
+class provider implements \core_privacy\local\metadata\null_provider {
+    /**
+     * Get the language string identifier with the component's language
+     * file to explain why this plugin stores no data.
+     *
+     * @return string
+     */
+    public static function get_reason() : string {
+        return 'privacy:metadata';
+    }
+}

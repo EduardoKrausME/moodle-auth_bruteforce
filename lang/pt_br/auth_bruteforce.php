@@ -18,7 +18,7 @@
  * lang file
  *
  * @package    auth_bruteforce
- * @copyright  2019 Eduardo Kraus ME <kraus@eduardokraus.com>
+ * @copyright  2020 Eduardo Kraus (http://eduardokraus.com)
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -27,3 +27,5 @@ $string['auth_bruteforcelimit'] = 'Limite máximo de tentativas por IP até o am
 $string['auth_bruteforcelimit_key'] = 'Máximo de tentativas por IP';
 $string['auth_bruteforcebloqued'] = 'Você excedeu o limite de tentativas. Contate o Administrador para mais detalhes.';
 $string['pluginname'] = 'Brute Force Detect';
+
+$string['privacy:metadata'] = 'O auth bruteforce não armazena nenhum dado pessoal.';
