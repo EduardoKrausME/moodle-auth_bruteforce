@@ -25,7 +25,7 @@
 $string['auth_bruteforcedescription'] = 'Brute Force system will block users after a retry limit.';
 $string['auth_bruteforcelimit'] = 'Maximum of attempts by IP to the environment block';
 $string['auth_bruteforcelimit_key'] = 'Maximum attempts per IP';
-$string['auth_bruteforcebloqued'] = 'You have exceeded the retry limit. Contact the Administrator for more details.';
+$string['auth_bruteforcebloqued'] = 'You have made many mistakes in your password and your IP has been blocked. Contact your Moodle administrator for details';
 $string['pluginname'] = 'Brute Force Detect';
 
 $string['privacy:metadata'] = 'The auth bruteforce does not store any personal data.';
