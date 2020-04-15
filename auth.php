@@ -45,16 +45,19 @@ class auth_plugin_bruteforce extends auth_plugin_base {
         $this->authtype = 'bruteforce';
         $this->config = get_config('auth/bruteforce');
 
-        $timestamp = time();
+        if ($this->config->hours < 5) {
+            $this->config->hours = 5;
+        }
+        if ($this->config->limit < 5) {
+            $this->config->limit = 5;
+        }
+
+        $hours = time() - ($this->config->hours * 60 * 60);
         $sql = "SELECT id
                   FROM {bruteforce_ip}
-                 WHERE ip = '" . getremoteaddr() . "'
-                   AND time > ({$timestamp}-86400) ";
+                 WHERE ip   = '" . getremoteaddr() . "'
+                   AND time > {$hours}";
         $tests = $DB->get_records_sql($sql);
-
-        if (!isset ($this->config->limit)) {
-            $this->config->limit = 20;
-        }
 
         if (count($tests) >= $this->config->limit) {
             die(get_string("auth_bruteforcebloqued", "auth_bruteforce"));

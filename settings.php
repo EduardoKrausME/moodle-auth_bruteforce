@@ -15,17 +15,24 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * settings file
  *
  * @package    auth_bruteforce
  * @copyright  2020 Eduardo Kraus (http://eduardokraus.com)
- * @license http://www.gnu.org/copyleft/gpl.html GNU Public License
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+defined('MOODLE_INTERNAL') || die;
 
-$plugin->version = 2020041500;
-$plugin->requires = 2012050800;
-$plugin->component = 'auth_bruteforce';
-$plugin->maturity = MATURITY_STABLE;
-$plugin->release = '1.3.2';
+if ($ADMIN->fulltree) {
+
+    // limit handler.
+    $settings->add(new admin_setting_configtext('auth_bruteforce/limit',
+        get_string('auth_bruteforce_limit', 'auth_bruteforce'),
+        get_string('auth_bruteforce_limit_description', 'auth_bruteforce'), 20, PARAM_INT));
+
+    // Blocked hours
+    $settings->add(new admin_setting_configtext('auth_bruteforce/hours',
+        get_string('auth_bruteforce_hours', 'auth_bruteforce'),
+        get_string('auth_bruteforce_hours_description', 'auth_bruteforce'), 24, PARAM_INT));
+}
